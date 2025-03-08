@@ -30,10 +30,10 @@ const { frontmatter } = Astro.props;
       openGraph={{
         basic: {
           title: "Minecodes",
-          image: "/img/me.png",
+          image: `${Astro.site?.href}/img/me.png`,
           type: "website",
           url: Astro.url.href,
-        }
+        },
       }}
     />
   </head>

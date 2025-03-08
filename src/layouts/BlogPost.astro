@@ -39,20 +39,18 @@ const author = await getEntry("authors", url.pathname.split("/")[2]);
           title: `${frontmatter.title} - ${author?.data.name}`,
           url: url.href,
           type: "article",
-          image: frontmatter.image
+          image: Astro.site?.href + frontmatter.image,
         },
         article: {
-          authors: [
-            author?.data.name || "Unknown"
-          ],
+          authors: [author?.data.name || "Unknown"],
           publishedTime: new Date(frontmatter.date).toISOString(),
-        }
+        },
       }}
       twitter={{
         card: "summary_large_image",
         title: `${frontmatter.title} - ${author?.data.name}`,
         description: frontmatter.description,
-        image: frontmatter.image,
+        image: Astro.site?.href + frontmatter.image,
       }}
     />
   </head>

@@ -37,14 +37,14 @@ const id = frontmatter.url.split("/")[2];
           title: `${frontmatter.name} | mcds.moe`,
           url: Astro.url.href,
           type: "profile",
-          image: frontmatter.avatar,
+          image: Astro.site?.href + frontmatter.avatar,
         },
       }}
       twitter={{
         card: "summary_large_image",
         title: `${frontmatter.name} | mcds.moe`,
         description: frontmatter.bio,
-        image: frontmatter.avatar,
+        image: Astro.site?.href + frontmatter.avatar,
       }}
       extend={{
         meta: [
@@ -52,7 +52,7 @@ const id = frontmatter.url.split("/")[2];
             name: "og:profile:username",
             content: id,
           },
-        ]
+        ],
       }}
     />
   </head>

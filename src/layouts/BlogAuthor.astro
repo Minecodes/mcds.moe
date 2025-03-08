@@ -1,0 +1,137 @@
+---
+import Image from "astro/components/Image.astro";
+import MenuBar from "../components/MenuBar.astro";
+import "../styles/global.css";
+import SocIcon from "../components/SocIcon.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+import Footer from "../components/Footer.astro";
+import Path from "../components/Path.astro";
+import { SEO } from "astro-seo";
+
+const { frontmatter } = Astro.props;
+const id = frontmatter.url.split("/")[2];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{frontmatter.name} | mcds.moe</title>
+    <link
+      rel="icon"
+      href={frontmatter.favicon || frontmatter.avatar || "/img/person.svg"}
+    />
+    <link
+      rel="alternate"
+      href="/rss.xml"
+      type="application/rss+xml"
+      title="RSS"
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <SEO
+      title=`${frontmatter.name} | mcds.moe`
+      description={frontmatter.description}
+      openGraph={{
+        basic: {
+          title: `${frontmatter.name} | mcds.moe`,
+          url: Astro.url.href,
+          type: "profile",
+          image: frontmatter.avatar,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: `${frontmatter.name} | mcds.moe`,
+        description: frontmatter.bio,
+        image: frontmatter.avatar,
+      }}
+      extend={{
+        meta: [
+          {
+            name: "og:profile:username",
+            content: id,
+          },
+        ]
+      }}
+    />
+  </head>
+  <body>
+    <div class="fixed w-full">
+      <MenuBar />
+      <CookieBanner />
+    </div>
+    <div
+      class="flex flex-col items-center justify-center min-h-screen bg-blue-500 dark:bg-blue-800 snap-start pb-5"
+    >
+      {
+        frontmatter.avatar ? (
+          <Image
+            src={frontmatter.avatar}
+            alt={frontmatter.name}
+            height={300}
+            width={300}
+            class="rounded-full"
+          />
+        ) : null
+      }
+      <h1 class="pt-10 text-white text-6xl font-[Caveat_Variable] font-bold">
+        {frontmatter.mood || "😀"}
+        {frontmatter.name}
+      </h1>
+      <div class="flex flex-row space-x-3 pt-10">
+        {
+          frontmatter.guest ? (
+            <div class="text-sm bg-indigo-700 dark:bg-indigo-500 rounded-2xl px-1 text-white cursor-default">
+              Guest
+            </div>
+          ) : (
+            ""
+          )
+        }{
+          frontmatter.admin ? (
+            <div class="text-sm bg-red-600 dark:bg-red-500 rounded-2xl px-1 text-white cursor-default">
+              Admin
+            </div>
+          ) : (
+            ""
+          )
+        }
+      </div>
+      <div class="pt-5 text-white">
+        <Path author={id} authorName={frontmatter.name} />
+      </div>
+      <div class="flex flex-row space-x-3 pt-5">
+        {
+          frontmatter.socials.map((social) => {
+            return (
+              <a
+                aria-label={social.name}
+                href={social.url}
+                class="text-white text-2xl"
+              >
+                <SocIcon
+                  href={social.icon}
+                  alt={social.name}
+                  class={social.styles}
+                />
+              </a>
+            );
+          })
+        }
+      </div>
+      <h5
+        class="pt-5 text-white text-3xl font-[Edu_NSW_ACT_Foundation_Variable]"
+      >
+        {frontmatter.bio}
+      </h5>
+      <article
+        class="prose lg:prose-xl dark:prose-invert font-[Edu_NSW_ACT_Foundation_Variable] prose-p:text-white prose-headings:text-white prose-a:text-white prose-table:text-white"
+      >
+        <slot />
+      </article>
+    </div>
+    <hr class="border-black w-full" />
+    <Footer class="w-full" hide-icons />
+  </body>
+</html>

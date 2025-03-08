@@ -1,0 +1,30 @@
+---
+import Layout from "./Layout.astro";
+import "../styles/global.css";
+import MenuBar from "../components/MenuBar.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <div class="fixed top-0 left-0 w-full z-50">
+    <MenuBar />
+  </div>
+
+  <div
+    class="flex flex-col items-center justify-center min-h-screen bg-red-800"
+  >
+    <h1 class="text-9xl pt-50 pb-20 text-white font-[Josefin_Sans_Variable] ">
+      {frontmatter.title}
+    </h1>
+    <article class="prose max-w-screen/2xl text-white pb-20">
+      <slot />
+    </article>
+  </div>
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

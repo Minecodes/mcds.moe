@@ -1,0 +1,37 @@
+---
+import MenuBar from "./MenuBar.astro";
+import { Image } from "astro:assets";
+import me from "../assets/me.png";
+import Footer from "./Footer.astro";
+import { Icon } from "astro-icon/components";
+import SocialIcons from "./SocialIcons.astro";
+---
+
+<div class="h-full">
+  <div class="fixed w-full">
+    <MenuBar />
+  </div>
+  <div class="flex items-center justify-center h-screen bg-blue-500 snap-start">
+    <div
+      class="fixed flex flex-col items-center justify-between w-fit p-1 px-4"
+    >
+      <Image src={me} alt="Thies Ohme" height={300} class="rounded-full" />
+      <h1 class="pt-10 text-white text-6xl font-[Caveat_Variable] font-bold">
+        📟 Hello, Fellow
+      </h1>
+      <h5 class="pt-5 text-white text-3xl font-[Edu_NSW_ACT_Foundation_Variable]">
+        I'm Thies Ohme, also known as Minecodes
+      </h5>
+      <SocialIcons />
+    </div>
+  </div>
+  <div class="w-full">
+    <Footer hide-icons />
+  </div>
+</div>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

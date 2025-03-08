@@ -1,0 +1,105 @@
+---
+import { getEntry } from "astro:content";
+import MenuBar from "../components/MenuBar.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import Path from "../components/Path.astro";
+import { SEO } from "astro-seo";
+
+const { frontmatter } = Astro.props;
+console.log(frontmatter);
+const url = new URL(frontmatter.url, "https://example.com");
+const author = await getEntry("authors", url.pathname.split("/")[2]);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{frontmatter.title} - {author?.data.name}</title>
+    <meta name="description" content={frontmatter.description} />
+    <link
+      rel="icon"
+      href={author?.data.favicon || author?.data.avatar || "/img/person.svg"}
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      href="/rss.xml"
+      type="application/rss+xml"
+      title="RSS"
+    />
+    <SEO
+      title=`${frontmatter.title} - ${author?.data.name}`
+      description={frontmatter.description}
+      openGraph={{
+        basic: {
+          title: `${frontmatter.title} - ${author?.data.name}`,
+          url: url.href,
+          type: "article",
+          image: frontmatter.image
+        },
+        article: {
+          authors: [
+            author?.data.name || "Unknown"
+          ],
+          publishedTime: new Date(frontmatter.date).toISOString(),
+        }
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: `${frontmatter.title} - ${author?.data.name}`,
+        description: frontmatter.description,
+        image: frontmatter.image,
+      }}
+    />
+  </head>
+  <body>
+    <!-- Fixed header area with CookieBanner and MenuBar -->
+    <div class="fixed top-0 left-0 w-full z-50">
+      <CookieBanner />
+      <MenuBar />
+    </div>
+
+    <!-- Main content area with a hero section -->
+    <main class="min-h-screen flex flex-col">
+      <section
+        class="h-100 bg-blue-500 dark:bg-blue-800 flex flex-col items-center justify-center text-white"
+      >
+        <h1 class="text-8xl font-[Edu_NSW_ACT_Foundation_Variable] pb-10">
+          {frontmatter.title}
+        </h1>
+        <Path author={author?.id} authorName={author?.data.name} />
+        <p>
+          {new Date(frontmatter.date).toLocaleString()} - <a
+            href={`/blog/${author?.id}`}>{author?.data.name}</a
+          >
+          {
+            author?.data.guest ? (
+              <sup class="text-sm bg-indigo-700 dark:bg-indigo-500 rounded-2xl px-1">
+                G
+              </sup>
+            ) : (
+              ""
+            )
+          }
+        </p>
+      </section>
+      <section class="flex justify-center pt-8 pb-8 flex-grow dark:bg-black">
+        <article class="prose dark:prose-invert max-w-screen/2xl font-atkinson">
+          <slot />
+        </article>
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

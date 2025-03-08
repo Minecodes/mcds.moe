@@ -1,0 +1,34 @@
+---
+import "../styles/global.css";
+import Layout from "./Layout.astro";
+
+const { frontmatter } = Astro.props;
+// I'm Thies Ohme, also known as Minecodes. I'm currently { new Date().getFullYear() - 2007 } years old, a self-taught developer and student. Currently I'm studying at a German Gymnasium and learning a lot about web development.
+const today = new Date();
+const bday = new Date(frontmatter.bday);
+const age = Math.floor(
+  (today.getTime() - bday.getTime()) / 1000 / 60 / 60 / 24 / 365.25
+);
+const info = String(frontmatter.info).replace("%age%", String(age));
+---
+
+<Layout>
+  <article
+    class="p-4 space-y-10 prose lg:prose-xl prose-h1:font-[Caveat_Variable] prose-headings:font-[Edu_NSW_ACT_Foundation] prose-p:font-[Josefin_Sans_Variable] prose-table:font-[Josefin_Sans_Variable] dark:prose-invert"
+  >
+    <slot />
+  </article>
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

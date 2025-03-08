@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import "../styles/global.css";
+import ArrowLongRight from "./svg/ArrowLongRight.astro";
+import House from "./svg/House.astro";
+import Newspaper from "./svg/Newspaper.astro";
+import { getEntry } from "astro:content";
+
+const url = new URL(Astro.request.url);
+const path = url.pathname.split("/");
+
+export interface Props {
+  author?: string;
+  authorName?: string;
+}
+const { author, authorName } = Astro.props;
+---
+
+<div class="flex flex-row pb-2">
+  {
+    path.map((p, i) => {
+      if (i === path.length - 1) {
+        return <a href={url.pathname}>{p}</a>;
+      } else if (p === "") {
+        return (
+          <>
+            <a href="/">
+              <House />
+            </a>
+            <ArrowLongRight classes="px-2" />
+          </>
+        );
+      } else if (p === "blog") {
+        return (
+          <>
+            <a href="/blog">
+              <Newspaper />
+            </a>
+            <ArrowLongRight classes="px-2" />
+          </>
+        );
+      } else if (p === author) {
+        return (
+          <>
+            <a
+              href={url.pathname
+                .split("/")
+                .slice(0, i + 1)
+                .join("/")}
+            >
+              {authorName}
+            </a>
+            <ArrowLongRight classes="px-2" />
+          </>
+        );
+      }
+      return (
+        <>
+          <a
+            href={url.pathname
+              .split("/")
+              .slice(0, i + 1)
+              .join("/")}
+          >
+            {p}
+          </a>
+          <ArrowLongRight classes="px-2" />
+        </>
+      );
+    })
+  }
+</div>

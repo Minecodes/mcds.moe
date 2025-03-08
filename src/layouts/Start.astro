@@ -1,0 +1,87 @@
+---
+import Footer from "../components/Footer.astro";
+import MenuBar from "../components/MenuBar.astro";
+import "../styles/global.css";
+import DynImage from "../components/DynImage.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+import { SEO } from "astro-seo";
+
+const { frontmatter } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Minecodes</title>
+    <link
+      rel="alternate"
+      href="/rss.xml"
+      type="application/rss+xml"
+      title="RSS"
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <SEO
+      title="Minecodes"
+      description="I'm Thies Ohme, also known as Minecodes"
+      openGraph={{
+        basic: {
+          title: "Minecodes",
+          image: "/img/me.png",
+          type: "website",
+          url: Astro.url.href,
+        }
+      }}
+    />
+  </head>
+  <body>
+    <div class="h-full">
+      <div class="fixed w-full">
+        <MenuBar />
+        <CookieBanner />
+      </div>
+      <div
+        class="flex items-center justify-center h-screen bg-blue-500 dark:bg-black snap-start"
+      >
+        <div
+          class="fixed flex flex-col items-center justify-between w-fit p-1 px-4"
+        >
+          <DynImage
+            imagePath={frontmatter.image}
+            altText={frontmatter.author}
+            height={300}
+          />
+          <h1
+            class="pt-10 text-white text-6xl font-[Caveat_Variable] font-bold"
+          >
+            {frontmatter.title}
+          </h1>
+          <h5
+            class="pt-5 text-white text-3xl font-[Edu_NSW_ACT_Foundation_Variable]"
+          >
+            <slot />
+          </h5>
+        </div>
+      </div>
+      <div class="w-full">
+        <Footer hide-icons />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

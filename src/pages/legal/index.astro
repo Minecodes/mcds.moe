@@ -1,0 +1,38 @@
+---
+import CookieBanner from "../../components/CookieBanner.astro";
+import Footer from "../../components/Footer.astro";
+import MenuBar from "../../components/MenuBar.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Legal">
+  <div class="fixed top-0 left-0 w-full z-50">
+    <MenuBar />
+    <CookieBanner />
+  </div>
+
+  <div class="flex flex-col items-center justify-center h-screen bg-red-800">
+    <div class="fixed">
+      <h1 class="text-9xl pb-10 text-white">Legal</h1>
+      <p class="text-white">
+        You can find the imprint here.
+      </p>
+      <p class="text-white">
+        The only version I'll provide (for legal correctness purposes) is the<br>
+        German version. The technical infos will be in English for international<br>
+        understanding, and since it has no legal binding.
+      </p>
+
+      <h2 class="text-white text-4xl pt-5">Imprint</h2>
+      <a href="/legal/imprint" class="text-blue-500 underline font-bold"
+        >/legal/imprint</a
+      >
+
+      <h2 class="text-white text-4xl pt-5">Technical Infos (not of any legal)</h2>
+      <a href="/legal/technical-infos" class="text-blue-500 underline font-bold"
+        >/legal/technical-infos</a
+      >
+    </div>
+  </div>
+  <Footer />
+</Layout>

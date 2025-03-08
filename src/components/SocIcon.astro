@@ -1,0 +1,17 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    href: string;
+    alt?: string;
+    class?: string;
+}
+
+const { href, alt, class: className } = Astro.props;
+---
+
+{href.endsWith(".svg") ? (
+    <img src={href} alt={alt} class={className} />
+) : (
+    <Icon name={href} class="text-white" />
+)}

@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+---
+
+<div class="flex items-center justify-center h-4 p-4 pt-8">
+  <div class="px-4 relative flex w-full flex-col sm:flex-row">
+    <div
+      class="hidden sm:block w-fit bg-[#f3f4f6] dark:bg-gray-800 rounded-2xl p-2 px-4 drop-shadow-lg text-sm sm:text-base"
+    >
+      <a
+        href="/"
+        data-astro-prefetch
+        class="dark:bg-white dark:text-transparent font-extrabold transition-all duration-300 ease-in hover:animate-pulse hover:bg-gradient-to-r hover:from-emerald-500 hover:to-green-500 hover:bg-clip-text hover:text-transparent [background-clip:text]"
+      >
+        Minecodes
+      </a>
+    </div>
+    <div
+      class="mt-2 sm:mt-0 w-full sm:w-fit bg-[#f3f4f6] dark:bg-gray-800 rounded-2xl p-2 px-4 drop-shadow-lg text-sm sm:text-base flex justify-end sm:absolute sm:right-4"
+    >
+      <a
+        class="p-1 mr-auto hover:text-emerald-500 transition-all duration-300 ease-in active:text-emerald-500 active:hover:text-black dark:text-white"
+        href="/"
+        data-astro-prefetch
+        ><span class="sm:hidden font-extrabold">Minecodes</span><span
+          class="hidden sm:inline">Home</span
+        ></a
+      >
+      <a
+        class="p-1 hover:text-emerald-500 transition-all duration-300 ease-in dark:text-white"
+        href="/blog"
+        data-astro-prefetch>Blog</a
+      >
+      <a
+        class="p-1 hover:text-emerald-500 transition-all duration-300 ease-in dark:text-white"
+        href="/about"
+        data-astro-prefetch>About</a
+      >
+    </div>
+  </div>
+</div>

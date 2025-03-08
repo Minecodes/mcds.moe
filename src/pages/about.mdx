@@ -1,0 +1,26 @@
+---
+
+title: About Me
+image: /src/assets/me.png
+author: Thies Ohme
+bday: 2007-03-13
+info: I'm Thies Ohme, also known as Minecodes. I'm currently %age% years old, a self-taught developer and student. Currently I'm studying at a German Gymnasium and learning a lot about web development.
+layout: ../layouts/About.astro
+
+---
+
+# My skills
+
+<div hx-get="/async/about/skills" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>
+
+# My timeline
+
+<div hx-get="/async/about/timeline" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>
+
+# My projects
+
+<div hx-get="/async/about/projects" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>
+
+# My interests
+
+<div hx-get="/async/about/interests" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>

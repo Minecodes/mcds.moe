@@ -1,0 +1,78 @@
+---
+
+---
+
+<div
+  class="fixed bottom-0 left-0 right-0 z-50 bg-gray-800 text-white p-4 border-t border-gray-900 hidden"
+  id="cookie-banner"
+>
+  <div class="container mx-auto">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm">
+          I use cookies on my website to make some functions work or collect
+          anonymous viewer data.<br />
+          The cookies are stored locally on your device. By clicking "Accept All"
+          you agree to the use of all cookies.<br />
+          If you want to use only essential cookies, click "Only Essential" to opt
+          out of anonymous data collection.<br />
+          To learn more about the cookies I use, visit my <a
+            href="/privacy"
+            class="underline">privacy policy</a
+          > or check my <a href="/cookie-list.txt" class="underline"
+            >cookie list</a
+          >.
+        </p>
+      </div>
+      <div>
+        <button id="all" class="bg-blue-500 text-white px-4 py-2 rounded-md">
+          Accept All
+        </button>
+        <button id="none" class="bg-blue-500 text-white px-4 py-2 rounded-md">
+          Only Essential
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const acceptAll =
+    document.querySelector("#all") || document.getElementById("all");
+  const onlyEssential =
+    document.querySelector("#none") || document.getElementById("none");
+
+  // If consent already set, remove banner and load Umami if accepted all cookies.
+  if (window.localStorage.getItem("cookie-consent") === "all") {
+    loadUmami();
+    document.getElementById("cookie-banner")?.remove();
+  } else if (window.localStorage.getItem("cookie-consent") === "none") {
+    document.getElementById("cookie-banner")?.remove();
+  } else {
+    document.getElementById("cookie-banner")?.classList.remove("hidden");
+  }
+
+  // Function to load Umami analytics
+  function loadUmami() {
+    const script = document.createElement("script");
+    script.setAttribute("async", "true");
+    script.setAttribute("defer", "true");
+    script.setAttribute(
+      "data-website-id",
+      "45e57db9-e0e4-4d1f-bc9c-2468c278876a"
+    );
+    script.src = "https://analytics.umami.is/script.js";
+    document.head.appendChild(script);
+  }
+
+  acceptAll?.addEventListener("click", () => {
+    window.localStorage.setItem("cookie-consent", "all");
+    loadUmami();
+    document.getElementById("cookie-banner")?.remove();
+  });
+
+  onlyEssential?.addEventListener("click", () => {
+    window.localStorage.setItem("cookie-consent", "none");
+    document.getElementById("cookie-banner")?.remove();
+  });
+</script>

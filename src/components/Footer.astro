@@ -1,0 +1,50 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<footer class="flex flex-col h-50 bg-blue-500 dark:bg-blue-950 w-full">
+  <div class:list={["flex flex-row items-center justify-center w-full pt-5 gap-4", Astro.props['hide-icons'] && "hidden"]}>
+    <a href="https://codeberg.org/Minecodes" rel="preload"
+      ><Icon name="simple-icons:codeberg" class="text-white text-2xl" /></a
+    >
+    <a href="https://github.com/Minecodes" rel="preload"
+      ><Icon name="simple-icons:github" class="text-white text-2xl" /></a
+    >
+    <a href="https://youtube.com/@Minecodes" rel="preload"
+      ><Icon name="simple-icons:youtube" class="text-white text-2xl" /></a
+    >
+    <a href="https://sueden.social/@Minecodes" rel="preload"
+      ><Icon name="simple-icons:mastodon" class="text-white text-2xl" /></a
+    >
+    <a href="https://bsky.app/profile/mcds.moe" rel="preload"
+      ><Icon name="simple-icons:bluesky" class="text-white text-2xl" /></a
+    >
+    <a href="https://discord.gg/ngZaGzPnmq" rel="preload"
+      ><Icon name="simple-icons:discord" class="text-white text-2xl" /></a
+    >
+    <a href="https://links.minecodes.de" rel="preload"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="size-6 stroke-white stroke-[2.5]"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
+        ></path>
+      </svg></a
+    >
+  </div>
+  <div class="flex flex-col items-center justify-center w-full pt-5">
+    <h5 class="text-white text-lg font-[Edu_NSW_ACT_Foundation_Variable]">
+      © {new Date().getFullYear()} Thies Ohme
+    </h5>
+    <h5 class="text-white text-lg font-[Edu_NSW_ACT_Foundation_Variable]">All rights reserved</h5>
+    <h5 class="text-white text-lg font-[Edu_NSW_ACT_Foundation_Variable]">
+      This includes all names associated with this page and it's authors
+    </h5>
+    <a href="/legal" class="text-white underline">Legal</a>
+  </div>
+</footer>

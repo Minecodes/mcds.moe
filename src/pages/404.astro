@@ -1,0 +1,25 @@
+---
+import "../styles/global.css";
+import { Image } from "astro:assets";
+import notfound from "../assets/404.png";
+---
+
+<div class="flex items-center justify-center h-screen">
+  <Image src={notfound} alt="User: FFFFFUUUUUUUUUU!!!!!" height={200} />
+  <div class="ps-5 text-center">
+    <h1 class="text-9xl font-caveat">404</h1>
+    <h1 class="text-5xl">Page Not Found</h1>
+    <p>Sorry. This page doesn't exist. Maybe you misspelled it?</p>
+    <a href="/">Go back to home</a>
+  </div>
+</div>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Edu+NSW+ACT+Foundation:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
+  .font-caveat {
+    font-family: "Caveat", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+</style>

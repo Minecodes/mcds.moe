@@ -1,0 +1,96 @@
+---
+import Footer from "../components/Footer.astro";
+import MenuBar from "../components/MenuBar.astro";
+import "../styles/global.css";
+import DynImage from "../components/DynImage.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+
+const { frontmatter } = Astro.props;
+// I'm Thies Ohme, also known as Minecodes. I'm currently { new Date().getFullYear() - 2007 } years old, a self-taught developer and student. Currently I'm studying at a German Gymnasium and learning a lot about web development.
+const today = new Date();
+const bday = new Date(frontmatter.bday);
+const age = Math.floor(
+  (today.getTime() - bday.getTime()) / 1000 / 60 / 60 / 24 / 365.25
+);
+const info = String(frontmatter.info).replace("%age%", String(age));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link
+      rel="alternate"
+      href="/rss.xml"
+      type="application/rss+xml"
+      title="RSS"
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>Minecodes</title>
+  </head>
+  <body>
+    <div class="h-full">
+      <div class="fixed w-full">
+        <MenuBar />
+        <CookieBanner />
+      </div>
+      <div
+        class="flex flex-col items-center justify-center min-h-screen bg-blue-800 snap-start px-4"
+      >
+        <div
+          class="flex flex-col items-center justify-between w-full max-w-2xl py-8"
+        >
+          <DynImage
+            imagePath={frontmatter.image}
+            altText={frontmatter.author}
+            height={300}
+          />
+          <h1
+            class="pt-10 text-white text-4xl sm:text-5xl md:text-6xl font-[Caveat_Variable] font-bold text-center"
+          >
+            {frontmatter.title}
+          </h1>
+          <h5
+            class="pt-5 text-base sm:text-lg md:text-3xl font-[Edu_NSW_ACT_Foundation_Variable] text-white text-center"
+          >
+            {info}
+          </h5>
+        </div>
+      </div>
+      <div
+        class="flex items-center justify-center min-h-screen snap-start dark:bg-black"
+      >
+        <article
+          class="flex flex-col items-center justify-between w-full p-4 bg-accent min-h-screen space-y-10 prose lg:prose-xl prose-h1:font-[Caveat_Variable] prose-h2:font-[Edu_NSW_ACT_Foundation_Variable] prose-p:font-[Josefin_Sans_Variable] prose-table:font-[Josefin_Sans_Variable] dark:prose-invert"
+        >
+          <slot />
+        </article>
+      </div>
+      <div class="w-full">
+        <Footer />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  article > h1 {
+    font-family: "Caveat", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+</style>

@@ -5,11 +5,14 @@ import "../styles/global.css";
 import SocIcon from "../components/SocIcon.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import Footer from "../components/Footer.astro";
-import Path from "../components/Path.astro";
 import { SEO } from "astro-seo";
+import { getCollection } from "astro:content";
+import Paths from "../components/Paths.astro";
 
 const { frontmatter } = Astro.props;
 const id = frontmatter.url.split("/")[2];
+const allPosts = await getCollection("blog");
+const posts = allPosts.filter((post) => post.data.author.id === id);
 ---
 
 <!doctype html>
@@ -98,9 +101,7 @@ const id = frontmatter.url.split("/")[2];
           )
         }
       </div>
-      <div class="pt-5 text-white">
-        <Path author={id} authorName={frontmatter.name} />
-      </div>
+      <Paths />
       <div class="flex flex-row space-x-3 pt-5">
         {
           frontmatter.socials.map((social) => {
@@ -130,6 +131,26 @@ const id = frontmatter.url.split("/")[2];
       >
         <slot />
       </article>
+      <div>
+        <h5
+          class="pt-10 pb-3 text-white text-3xl font-bold font-[Caveat_Variable] text-center"
+        >
+          Posts
+        </h5>
+        <div class="flex flex-wrap space-x-2 space-y-2">
+          {
+            posts.map((i) => (
+              <a
+                href={`/blog/${i.id}`}
+                class="flex flex-col items-center font-[Edu_NSW_ACT_Foundation_Variable]"
+              >
+                <img src={i.data.image} alt={i.data.description} class="h-50 rounded-2xl" />
+                <h6 class="text-white text-xl">{i.data.title}</h6>
+              </a>
+            ))
+          }
+        </div>
+      </div>
     </div>
     <hr class="border-black w-full" />
     <Footer class="w-full" hide-icons />

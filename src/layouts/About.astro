@@ -4,15 +4,17 @@ import MenuBar from "../components/MenuBar.astro";
 import "../styles/global.css";
 import DynImage from "../components/DynImage.astro";
 import CookieBanner from "../components/CookieBanner.astro";
+import Paths from "../components/Paths.astro";
+import { SEO } from "astro-seo";
 
 const { frontmatter } = Astro.props;
-// I'm Thies Ohme, also known as Minecodes. I'm currently { new Date().getFullYear() - 2007 } years old, a self-taught developer and student. Currently I'm studying at a German Gymnasium and learning a lot about web development.
 const today = new Date();
 const bday = new Date(frontmatter.bday);
 const age = Math.floor(
   (today.getTime() - bday.getTime()) / 1000 / 60 / 60 / 24 / 365.25
 );
 const info = String(frontmatter.info).replace("%age%", String(age));
+const url = new URL(frontmatter.url, "https://example.com");
 ---
 
 <!doctype html>
@@ -29,7 +31,29 @@ const info = String(frontmatter.info).replace("%age%", String(age));
       title="RSS"
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>Minecodes</title>
+    <title>{frontmatter.pageTitle}</title>
+    <SEO
+      title=`${frontmatter.title}`
+      description={info}
+      openGraph={{
+        basic: {
+          title: `${frontmatter.title}`,
+          url: url.href,
+          type: "article",
+          image: Astro.site?.href + frontmatter.image,
+        },
+        article: {
+          authors: ["Thies Ohme"],
+          publishedTime: new Date(Date.now()).toISOString(),
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: `${frontmatter.title}`,
+        description: frontmatter.description,
+        image: Astro.site?.href + frontmatter.image,
+      }}
+    />
   </head>
   <body>
     <div class="h-full">
@@ -53,6 +77,7 @@ const info = String(frontmatter.info).replace("%age%", String(age));
           >
             {frontmatter.title}
           </h1>
+          <Paths />
           <h5
             class="pt-5 text-base sm:text-lg md:text-3xl font-[Edu_NSW_ACT_Foundation_Variable] text-white text-center"
           >

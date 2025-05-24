@@ -1,11 +1,12 @@
 ---
+import { SEO } from "astro-seo";
 import "../styles/global.css";
 
 type Props = {
   title?: string;
 };
 
-const { title = 'Minecodes' } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,6 +16,24 @@ const { title = 'Minecodes' } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <SEO
+      title=`${title}`
+      description="Welcome to my blog, where I share insights on technology, development, photography, and more."
+      openGraph={{
+        basic: {
+          title: `${title}`,
+          url: Astro.site?.href,
+          image: "/img/thies.png",
+          type: "website",
+        },
+      }}
+      twitter={{
+        title: `${title}`,
+        description: "Welcome to my blog, where I share insights on technology, development, photography, and more.",
+        card: "summary_large_image",
+        image: "/img/thies.png",
+      }}
+    />
     <title>{title}</title>
     <link
       rel="alternate"

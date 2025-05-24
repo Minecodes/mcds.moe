@@ -4,8 +4,8 @@ import MenuBar from "../components/MenuBar.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
-import Path from "../components/Path.astro";
 import { SEO } from "astro-seo";
+import Paths from "../components/Paths.astro";
 
 const { frontmatter } = Astro.props;
 console.log(frontmatter);
@@ -64,19 +64,21 @@ const author = await getEntry("authors", url.pathname.split("/")[2]);
     <!-- Main content area with a hero section -->
     <main class="min-h-screen flex flex-col">
       <section
-        class="h-100 bg-blue-500 dark:bg-blue-800 flex flex-col items-center justify-center text-white"
+        class="h-100 bg-blue-500 dark:bg-blue-800 flex flex-col items-center justify-center text-white px-4"
       >
-        <h1 class="text-8xl font-[Edu_NSW_ACT_Foundation_Variable] pb-10">
+        <h1
+          class="text-4xl md:text-6xl lg:text-8xl font-[Edu_NSW_ACT_Foundation_Variable] pb-6 md:pb-10 text-center"
+        >
           {frontmatter.title}
         </h1>
-        <Path author={author?.id} authorName={author?.data.name} />
-        <p>
+        <Paths />
+        <p class="pt-5 text-sm md:text-base text-center">
           {new Date(frontmatter.date).toLocaleString()} - <a
             href={`/blog/${author?.id}`}>{author?.data.name}</a
           >
           {
             author?.data.guest ? (
-              <sup class="text-sm bg-indigo-700 dark:bg-indigo-500 rounded-2xl px-1">
+              <sup class="text-xs md:text-sm bg-indigo-700 dark:bg-indigo-500 rounded-2xl px-1">
                 G
               </sup>
             ) : (

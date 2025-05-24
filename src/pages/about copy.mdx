@@ -9,23 +9,22 @@ info: I'm Thies Ohme, also known as Minecodes. I'm currently %age% years old, a 
 layout: ../layouts/About.astro
 
 ---
-import Interests from "./async/about/interests.mdx"
-import Projects from "./async/about/projects.md"
 import Skills from "./async/about/skills.md"
-import Timeline from "./async/about/timeline.md"
 
 # My skills
 
-<Skills async />
+<Skills />
+
+<div hx-get="/async/about/skills" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>
 
 # My timeline
 
-<Timeline async />
+<div hx-get="/async/about/timeline" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>
 
 # My projects
 
-<Projects async />
+<div hx-get="/async/about/projects" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>
 
 # My interests
 
-<Interests async />
+<div hx-get="/async/about/interests" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>

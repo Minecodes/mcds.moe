@@ -7,15 +7,13 @@ import icon from 'astro-icon';
 
 import mdx from '@astrojs/mdx';
 
-import partytown from '@astrojs/partytown';
-
-import htmx from 'astro-htmx';
+//import htmx from 'astro-htmx';
 
 import robotsTxt from 'astro-robots-txt';
 
-import compressor from 'astro-compressor';
-
 import sitemap from '@astrojs/sitemap';
+
+import compress from "@playform/compress";
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,16 +22,25 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [icon(), mdx(), partytown(), htmx(), robotsTxt({}), compressor({
-    brotli: true,
-    gzip: true,
+  markdown: {
+    syntaxHighlight: 'prism',
+    gfm: true,
+  },
+
+  integrations: [icon(), mdx(), /**htmx()**/, robotsTxt({}), compress({
+    JavaScript: true,
+    CSS: true,
+    HTML: true,
+    SVG: true,
+    Image: true,
+    JSON: true,
   }), sitemap()],
 
-  experimental: {
+  /**experimental: {
     clientPrerender: true,
-  },
-  prefetch: {
+  },**/
+  /**prefetch: {
     defaultStrategy: 'load',
     prefetchAll: true,
-  },
+  },**/
 });

@@ -1,6 +1,7 @@
 ---
 import "../../../styles/global.css";
 import { getCollection } from "astro:content";
+import { Card } from "accessible-astro-components";
 
 const posts = await getCollection("blog");
 const authors = await getCollection("authors");
@@ -15,6 +16,7 @@ const display = (): [] => {
       description: post.data.description,
       author: author?.data.name,
       slug: post.id,
+      image: post.data.image,
     });
   });
 
@@ -25,14 +27,18 @@ const display = (): [] => {
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
   {
     display().map((post) => (
-      <div class="bg-white dark:bg-black rounded-lg shadow-lg shadow-white p-4">
-        <h5 class="text-xl font-bold dark:text-white">{post.title}</h5>
+      <Card
+        class="text-black dark:text-white font-[Geist_Mono_Variable]"
+        img={post.image}
+        url={`/blog/${post.slug}`}
+        title={post.title}
+      >
+        <h3 class="text-lg">By {post.author}</h3>
         <p class="text-gray-500">{post.description}</p>
-        <h5 class="text-gray-500">Author: {post.author}</h5>
         <a href={`/blog/${post.slug}`} class="text-blue-500">
           Read more
         </a>
-      </div>
+      </Card>
     ))
   }
 </div>

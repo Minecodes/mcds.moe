@@ -27,6 +27,18 @@ export default defineConfig({
     gfm: true,
   },
 
+  /**i18n: {
+    locales: ['en', 'de'],
+    defaultLocale: 'en',
+    fallback: {
+      'de': 'en',
+    },
+    routing: {
+      fallbackType: 'redirect',
+      redirectToDefaultLocale: true,
+    }
+  },**/
+
   integrations: [icon(), mdx(), /**htmx()**/, robotsTxt({}), compress({
     JavaScript: true,
     CSS: true,

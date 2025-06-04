@@ -1,6 +1,7 @@
 ---
 import "../../../styles/global.css";
 import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
 import { Card } from "accessible-astro-components";
 
 const posts = await getCollection("blog");
@@ -29,9 +30,14 @@ const display = (): [] => {
     display().map((post) => (
       <div class="bg-white dark:bg-black rounded-lg border border-black dark:border-white p-4">
         <a href={`/blog/${post.slug}`}>
-          <img
+          <Picture
             src={post.image}
             alt={post.description}
+            format="webp"
+            formats={["png", "webp", "jpg"]}
+            height={200}
+            width={356}
+            pictureAttributes={{ class: "w-full object-cover rounded-lg mb-4" }}
             class="w-full object-cover rounded-lg mb-4"
           />
           <h5 class="text-xl font-bold dark:text-white">{post.title}</h5>

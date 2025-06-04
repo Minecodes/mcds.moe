@@ -1,9 +1,8 @@
 ---
 import MenuBar from "./MenuBar.astro";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import me from "../assets/me.png";
 import Footer from "./Footer.astro";
-import { Icon } from "astro-icon/components";
 import SocialIcons from "./SocialIcons.astro";
 ---
 
@@ -15,7 +14,7 @@ import SocialIcons from "./SocialIcons.astro";
     <div
       class="fixed flex flex-col items-center justify-between w-fit p-1 px-4"
     >
-      <Image src={me} alt="Thies Ohme" height={300} class="rounded-full" />
+      <Picture src={me} formats={["webp", "png", "jpg"]} alt="Thies Ohme" height={300} width={300} class="rounded-full" />
       <h1 class="pt-10 text-white text-6xl font-[Caveat_Variable] font-bold">
         📟 Hello, Fellow
       </h1>

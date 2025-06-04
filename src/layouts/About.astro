@@ -2,7 +2,7 @@
 import Footer from "../components/Footer.astro";
 import MenuBar from "../components/MenuBar.astro";
 import "../styles/global.css";
-import DynImage from "../components/DynImage.astro";
+import { Picture } from "astro:assets";
 import CookieBanner from "../components/CookieBanner.astro";
 import Paths from "../components/Paths.astro";
 import { SEO } from "astro-seo";
@@ -22,7 +22,8 @@ const url = new URL(frontmatter.url, "https://example.com");
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/img/thies-fav.png" />
+    <link rel="icon" type="image/webp" href="/img/thies-fav.webp" />
     <meta name="generator" content={Astro.generator} />
     <link
       rel="alternate"
@@ -67,10 +68,17 @@ const url = new URL(frontmatter.url, "https://example.com");
         <div
           class="flex flex-col items-center justify-between w-full max-w-2xl py-8"
         >
-          <DynImage
-            imagePath={frontmatter.image}
-            altText={frontmatter.author}
+          <Picture
+            src={frontmatter.image}
+            alt={frontmatter.author}
             height={300}
+            width={300}
+            format="webp"
+            formats={["webp", "png", "jpg"]}
+            pictureAttributes={{
+              "class": "rounded-full",
+            }}
+            class="rounded-full"
           />
           <h1
             class="pt-10 text-white text-4xl sm:text-5xl md:text-6xl font-[Caveat_Variable] font-bold text-center"

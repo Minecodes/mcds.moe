@@ -1,11 +1,11 @@
 ---
 import "../styles/global.css";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import notfound from "../assets/404.png";
 ---
 
 <div class="flex items-center justify-center h-screen">
-  <Image src={notfound} alt="User: FFFFFUUUUUUUUUU!!!!!" height={200} />
+  <Picture src={notfound} alt="User: FFFFFUUUUUUUUUU!!!!!" height={200} formats={["png", "webp", "jpg"]} />
   <div class="ps-5 text-center">
     <h1 class="text-9xl font-caveat">404</h1>
     <h1 class="text-5xl">Page Not Found</h1>

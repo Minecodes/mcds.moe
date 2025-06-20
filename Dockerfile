@@ -1,4 +1,4 @@
-FROM oven/bun:latest AS build
+FROM oven/bun:debian AS build
 WORKDIR /app
 COPY . .
 RUN bun install

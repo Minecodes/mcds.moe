@@ -1,4 +1,4 @@
-FROM oven/bun:latest AS build
+FROM oven/bun:alpine AS build
 WORKDIR /app
 COPY . .
 RUN bun install

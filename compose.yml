@@ -1,5 +1,5 @@
 services:
   server:
-    images: git.mcds.moe/thies/mcds.moe:latest
+    image: git.mcds.moe/thies/mcds.moe:latest
     ports:
       - "127.0.0.1:3009:80"

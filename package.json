@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "docker": "sudo docker buildx build --platform linux/arm64,linux/amd64 --push -t git.mcds.moe/thies/mcds.moe:latest -f Dockerfile ."
   },
   "dependencies": {
     "@astrojs/mdx": "4.3.4",
